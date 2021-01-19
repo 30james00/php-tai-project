@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/photo-upload', 'upload');
+Route::post('/photo-upload', 'PhotoController@strore');
+Route::get('/photo-view', 'PhotoController@show');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
