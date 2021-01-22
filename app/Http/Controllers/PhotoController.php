@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class PhotoController extends Controller
 {
@@ -14,7 +16,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $images = Stolarz::files('/images');
+        return view('view-uploads')->with('images', $images);
     }
 
     /**
@@ -44,9 +47,9 @@ class PhotoController extends Controller
                     'image' => 'mimes:jpeg,png|max:1014',
                 ]);
                 $extension = $request->image->extension();
-                $request->image->storeAs('/public', $validated['name'] . "." . $extension);
+                $request->image->storeAs('/images', $validated['name'] . "." . $extension);
                 $url = Storage::url($validated['name'] . "." . $extension);
-                $file = File::create([
+                $file = Photo::create([
                     'name' => $validated['name'],
                     'url' => $url,
                 ]);
@@ -65,8 +68,7 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
-        $images = File::all();
-        return view('view-uploads')->with('images', $images);
+ 
     }
 
     /**
