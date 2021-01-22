@@ -19,8 +19,8 @@ Route::get('/', function () {
 });
 
 Route::view('/photo-upload', 'upload')->middleware(['auth'])->name('photo-upload');
-Route::post('/photo-upload', [PhotoController::class, 'store'])->name('photo-upload');
-Route::get('/photo-view', [PhotoController::class, 'show']);
+Route::post('/photo-upload/create', [PhotoController::class, 'store'])->name('photo-upload-create');
+Route::get('/photo-view', [PhotoController::class, 'index'])->name('photo-view');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

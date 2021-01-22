@@ -16,7 +16,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $images = Stolarz::files('/images');
+        $images = Photo::all();
         return view('view-uploads')->with('images', $images);
     }
 
