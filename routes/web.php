@@ -18,9 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/photo-upload', 'upload')->middleware(['auth'])->name('photo-upload');
-Route::post('/photo-upload/create', [PhotoController::class, 'store'])->name('photo-upload-create');
-Route::get('/photo-view', [PhotoController::class, 'index'])->name('photo-view');
+//PhotoController routes
+Route::get('/photo-upload/create', [PhotoController::class, 'create'])->middleware(['auth'])->name('photo-upload-create');
+Route::post('/photo-upload/store', [PhotoController::class, 'store'])->middleware(['auth'])->name('photo-upload-store');
+Route::get('/photo-view', [PhotoController::class, 'index'])->middleware(['auth'])->name('photo-view');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

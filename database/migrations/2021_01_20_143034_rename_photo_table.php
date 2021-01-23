@@ -23,6 +23,6 @@ class RenamePhotoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::rename('photos', 'photo');
     }
 }
