@@ -4,5 +4,5 @@
 
 return [
     'upload' => 'Prześlij',
-    'gallery' => 'Galleria'
+    'gallery' => 'Galeria'
 ];
