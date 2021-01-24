@@ -79,7 +79,7 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        //
+        return view('edit-photo')->with('photo', $photo);
     }
 
     /**

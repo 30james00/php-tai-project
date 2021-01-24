@@ -5,7 +5,7 @@
     <form class="m-2" method="post" action="/photo-upload/store" enctype="multipart/form-data">
       @csrf
       <div class="form-group">
-        {{-- <label for="name">File Name</label>--}}
+        <label for="name">File Name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter file Name" name="name">
       </div>
       <div class="form-group m-1">
