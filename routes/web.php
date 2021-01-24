@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 //PhotoController routes
 Route::get('/photo-upload/create', [PhotoController::class, 'create'])->middleware(['auth'])->name('photo-upload-create');
+Route::get('/photo-upload/delete/{photo}', [PhotoController::class, 'destroy'])->middleware(['auth'])->name('photo-upload-delete');
 Route::post('/photo-upload/store', [PhotoController::class, 'store'])->middleware(['auth'])->name('photo-upload-store');
 Route::get('/photo-view', [PhotoController::class, 'index'])->middleware(['auth'])->name('photo-view');
 

@@ -102,6 +102,11 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //
+        //delete file
+        Storage::delete($photo->url);
+        //delete form database
+        $photo->delete();
+        //redirect to the same page
+        return back();
     }
 }

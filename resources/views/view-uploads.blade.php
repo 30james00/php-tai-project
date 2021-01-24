@@ -21,7 +21,9 @@
               @forelse($images as $image)
               <tr>
                 <td class="cs-p-1">{{ $image->name }}</td>
+                <td class="cs-p-1">{{ $image->url }}</td>
                 <td class="cs-p-1"><a href="{{ $image->url }}">View Image</a></td>
+                <td class="cs-p-1"><a href="{{ route('photo-upload-delete', ['photo' => $image->id]) }}">{{$image->id}}</a></td>
               </tr>
               @empty
               <p>No Images at the moment</p>

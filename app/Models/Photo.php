@@ -7,6 +7,11 @@ use Illuminate\Support\Str;
 
 class Photo extends Model
 {
+    //uuid as id configuration
+    protected $primaryKey = 'id';
+    protected $keyType = 'uuid';
+    public $incrementing = false;
+
     public function __construct(array $attributes = [])
     {
         //generating Ordered UUID
