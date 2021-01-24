@@ -4,5 +4,9 @@
 
 return [
     'upload' => 'Upload',
-    'gallery' => 'Gallery'
+    'gallery' => 'Gallery',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'file-name' => 'File name',
+    'view' => 'View',
 ];

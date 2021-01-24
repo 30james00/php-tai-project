@@ -17,15 +17,12 @@ use App\Http\Controllers\PhotoController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-//PhotoController routes
-Route::get('/photo-upload/create', [PhotoController::class, 'create'])->middleware(['auth'])->name('photo-upload-create');
-Route::get('/photo-upload/delete/{photo}', [PhotoController::class, 'destroy'])->middleware(['auth'])->name('photo-upload-delete');
-Route::post('/photo-upload/store', [PhotoController::class, 'store'])->middleware(['auth'])->name('photo-upload-store');
-Route::get('/photo-view', [PhotoController::class, 'index'])->middleware(['auth'])->name('photo-view');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+//PhotoController routes
+Route::resource('photos', PhotoController::class)->middleware(['auth']);
+
 
 require __DIR__.'/auth.php';

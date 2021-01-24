@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     {{-- enctype attribute is important if your form contains file upload --}}
     {{-- Please check https://www.w3schools.com/tags/att_form_enctype.asp for further info --}}
-    <form class="m-2" method="post" action="/photo-upload/store" enctype="multipart/form-data">
+    <form class="m-2" method="post" action="/photos" enctype="multipart/form-data">
       @csrf
       <div class="form-group">
         <label for="name">File Name</label>

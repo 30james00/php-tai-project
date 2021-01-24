@@ -22,8 +22,9 @@
               <tr>
                 <td class="cs-p-1">{{ $image->name }}</td>
                 <td class="cs-p-1">{{ $image->url }}</td>
-                <td class="cs-p-1"><a href="{{ $image->url }}">View Image</a></td>
-                <td class="cs-p-1"><a href="{{ route('photo-upload-delete', ['photo' => $image->id]) }}">{{$image->id}}</a></td>
+                <td class="cs-p-1"><a href="{{ $image->url }}"> {{ __('photo.view') }}</a></td>
+                <td class="cs-p-1"><a href="{{ route('photos.destroy', ['photo' => $image->id]) }}">{{  __('photo.delete') }}</a></td>
+                <td class="cs-p-1"><a href="{{ route('photos.edit', ['photo' => $image->id]) }}">{{  __('photo.edit') }}</a></td>
               </tr>
               @empty
               <p>No Images at the moment</p>
