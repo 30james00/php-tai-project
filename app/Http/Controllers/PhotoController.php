@@ -91,7 +91,12 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'string|max:40',
+        ]);
+        $photo->name = $validated['name'];
+        $photo->save();
+        return back();
     }
 
     /**
