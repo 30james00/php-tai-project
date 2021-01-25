@@ -22,6 +22,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 //PhotoController routes
+Route::get('photos/image/{path}', [PhotoController::class, 'showImage'])->middleware(['auth'])->name('photos.showImage');
 Route::resource('photos', PhotoController::class)->middleware(['auth']);
 
 

@@ -48,7 +48,7 @@ class PhotoController extends Controller
                 ]);
                 $extension = $request->image->extension();
                 $request->image->storeAs('/images', $validated['name'] . "." . $extension);
-                $url = Storage::url($validated['name'] . "." . $extension);
+                $url = $validated['name'] . "." . $extension;
                 $file = Photo::create([
                     'name' => $validated['name'],
                     'url' => $url,
@@ -68,7 +68,18 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
- 
+        return view('view-photo', [
+            'photo' => $photo,
+        ]);
+    }
+
+    public function showImage(string $path)
+    {
+        if (Storage::disk('local')->exists('images/'.$path)) {
+            
+            return response()->file(storage_path('app/images/'.$path));
+        }
+        abort(500, 'Could not upload image :(');
     }
 
     /**

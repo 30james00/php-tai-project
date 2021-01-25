@@ -22,7 +22,7 @@
               <tr>
                 <td class="cs-p-1">{{ $image->name }}</td>
                 <td class="cs-p-1">{{ $image->url }}</td>
-                <td class="cs-p-1"><a href="{{ $image->url }}"> {{ __('photo.view') }}</a></td>
+                <td class="cs-p-1"><a href="{{ route('photos.show', ['photo' => $image->id]) }}"> {{ __('photo.view') }}</a></td>
                 <td class="cs-p-1"><a href="{{ route('photos.destroy', ['photo' => $image->id]) }}">{{  __('photo.delete') }}</a></td>
                 <td class="cs-p-1"><a href="{{ route('photos.edit', ['photo' => $image->id]) }}">{{  __('photo.edit') }}</a></td>
               </tr>
