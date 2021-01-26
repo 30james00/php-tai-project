@@ -26,7 +26,7 @@
         <div class="text-red-900 font-bold">{{ $message }}</div>
         @enderror
       </div>
-      <button type="submit" class="bg-green-900 p-2 rounded-md text-white">Upload</button>
+      <button type="submit" class="bg-green-900 p-2 rounded-md text-white">{{ __('photo.upload') }}</button>
     </form>
   </div>
 </div>

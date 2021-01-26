@@ -114,16 +114,19 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        $validated = $request->validate([
-            'name' => 'string|max:40',
-            'public' => '',
-        ]);
-        $public = isset($validated['public']) ? true : false;
-        $photo->name = $validated['name'];
-        $photo->public = $public;
-        $photo->save();
-        Session::flash('success', "Success!");
-        return back();
+        if (auth()->user()->id == $photo->id) {
+            $validated = $request->validate([
+                'name' => 'string|max:40',
+                'public' => '',
+            ]);
+            $public = isset($validated['public']) ? true : false;
+            $photo->name = $validated['name'];
+            $photo->public = $public;
+            $photo->save();
+            Session::flash('success', "Success!");
+            return back();
+        }
+        abort(403, 'You are not photo owner');
     }
 
     /**
@@ -134,11 +137,14 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //delete file
-        Storage::delete('/images/'.$photo->url);
-        //delete form database
-        $photo->delete();
-        //redirect to the same page
-        return back();
+        if (auth()->user()->id == $photo->id) {
+            //delete file
+            Storage::delete('/images/' . $photo->url);
+            //delete form database
+            $photo->delete();
+            //redirect to the same page
+            return back();
+        }
+        abort(403, 'You are not photo owner');
     }
 }
