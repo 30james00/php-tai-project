@@ -122,6 +122,7 @@ class PhotoController extends Controller
         $photo->name = $validated['name'];
         $photo->public = $public;
         $photo->save();
+        Session::flash('success', "Success!");
         return back();
     }
 
