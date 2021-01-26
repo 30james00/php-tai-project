@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Mockery\Undefined;
 
 class PhotoController extends Controller
 {
@@ -39,22 +40,29 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        //check if file was 
         if ($request->hasFile('image')) {
-            //  Let's do everything here
             if ($request->file('image')->isValid()) {
-                //
+                //validation
                 $validated = $request->validate([
                     'name' => 'string|max:40',
                     'image' => 'mimes:jpeg,png|max:1014',
+                    'public' => '',
                 ]);
+                //checkbox to boolean
+                $public = isset($validated['public']) ? true : false;
+                //create uuid
                 $id = Str::orderedUuid();
+                //create filename
                 $extension = $request->image->extension();
-                $request->image->storeAs('/images', $id . "." . $extension);
                 $url = $id . "." . $extension;
+                $request->image->storeAs('/images', $url);
                 $file = Photo::create([
                     'id' => $id,
                     'name' => $validated['name'],
+                    'user' => auth()->user()->id,
                     'url' => $url,
+                    'public' => $public,
                 ]);
                 Session::flash('success', "Success!");
                 return \Redirect::back();

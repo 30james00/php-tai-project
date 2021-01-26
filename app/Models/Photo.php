@@ -16,6 +16,10 @@ class Photo extends Model
         'id', 'name', 'url', 'user', 'public'
     ];
 
+    protected $casts = [
+        'public' => 'boolean',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
