@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Mockery\Undefined;
 
 class PhotoController extends Controller
 {
@@ -16,8 +18,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $images = Photo::all();
-        return view('view-uploads')->with('images', $images);
+        $public = Photo::where('public', 1)->get();
+        $private = Photo::where('public', 0)->where('user', auth()->user()->id)->get();
+        return view('view-uploads', ['public' => $public, 'private' => $private]);
     }
 
     /**
@@ -38,20 +41,29 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
+        //check if file was 
         if ($request->hasFile('image')) {
-            //  Let's do everything here
             if ($request->file('image')->isValid()) {
-                //
+                //validation
                 $validated = $request->validate([
                     'name' => 'string|max:40',
                     'image' => 'mimes:jpeg,png|max:1014',
+                    'public' => '',
                 ]);
+                //checkbox to boolean
+                $public = isset($validated['public']) ? true : false;
+                //create uuid
+                $id = Str::orderedUuid();
+                //create filename
                 $extension = $request->image->extension();
-                $request->image->storeAs('/images', $validated['name'] . "." . $extension);
-                $url = $validated['name'] . "." . $extension;
+                $url = $id . "." . $extension;
+                $request->image->storeAs('/images', $url);
                 $file = Photo::create([
+                    'id' => $id,
                     'name' => $validated['name'],
+                    'user' => auth()->user()->id,
                     'url' => $url,
+                    'public' => $public,
                 ]);
                 Session::flash('success', "Success!");
                 return \Redirect::back();
@@ -75,9 +87,9 @@ class PhotoController extends Controller
 
     public function showImage(string $path)
     {
-        if (Storage::disk('local')->exists('images/'.$path)) {
-            
-            return response()->file(storage_path('app/images/'.$path));
+        if (Storage::disk('local')->exists('images/' . $path)) {
+
+            return response()->file(storage_path('app/images/' . $path));
         }
         abort(500, 'Could not upload image :(');
     }
@@ -102,12 +114,19 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        $validated = $request->validate([
-            'name' => 'string|max:40',
-        ]);
-        $photo->name = $validated['name'];
-        $photo->save();
-        return back();
+        if (auth()->user()->id == $photo->id) {
+            $validated = $request->validate([
+                'name' => 'string|max:40',
+                'public' => '',
+            ]);
+            $public = isset($validated['public']) ? true : false;
+            $photo->name = $validated['name'];
+            $photo->public = $public;
+            $photo->save();
+            Session::flash('success', "Success!");
+            return back();
+        }
+        abort(403, 'You are not photo owner');
     }
 
     /**
@@ -118,11 +137,14 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        //delete file
-        Storage::delete($photo->url);
-        //delete form database
-        $photo->delete();
-        //redirect to the same page
-        return back();
+        if (auth()->user()->id == $photo->id) {
+            //delete file
+            Storage::delete('/images/' . $photo->url);
+            //delete form database
+            $photo->delete();
+            //redirect to the same page
+            return back();
+        }
+        abort(403, 'You are not photo owner');
     }
 }

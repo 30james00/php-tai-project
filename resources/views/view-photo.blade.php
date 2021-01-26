@@ -16,5 +16,4 @@
       </div>
     </div>
   </div>
-  <!-- TODO: success component -->
 </x-app-layout>
