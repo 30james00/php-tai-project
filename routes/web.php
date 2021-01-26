@@ -25,5 +25,11 @@ Route::get('/dashboard', function () {
 Route::get('photos/image/{path}', [PhotoController::class, 'showImage'])->middleware(['auth'])->name('photos.showImage');
 Route::resource('photos', PhotoController::class)->middleware(['auth']);
 
+//language settings
+Route::get('locale/{locale}', function ($locale) {
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->middleware('locale')->name('locale.setting');
 
 require __DIR__.'/auth.php';

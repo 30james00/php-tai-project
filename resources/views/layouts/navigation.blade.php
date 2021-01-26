@@ -26,6 +26,16 @@
                         {{ __('photo.gallery') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('locale.setting', ['locale' => 'en'])" :active="app()->getLocale()=='en'">
+                        {{ __('EN') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('locale.setting', ['locale' => 'pl'])" :active="app()->getLocale()=='pl'">
+                        {{ __('PL') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -85,6 +95,16 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('photos.index')" :active="request()->routeIs('photos.index')">
                 {{ __('photo.gallery') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('locale.setting', ['locale' => 'en'])" :active="app()->getLocale()=='en'">
+                {{ __('EN') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('locale.setting', ['locale' => 'pl'])" :active="app()->getLocale()=='pl'">
+                {{ __('PL') }}
             </x-responsive-nav-link>
         </div>
 
