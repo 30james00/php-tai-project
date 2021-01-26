@@ -11,15 +11,13 @@ class Photo extends Model
     protected $primaryKey = 'id';
     protected $keyType = 'uuid';
     public $incrementing = false;
-
-    public function __construct(array $attributes = [])
-    {
-        //generating Ordered UUID
-        $attributes['id'] = Str::orderedUuid();
-        parent::__construct($attributes);
-    }
-
+    
     protected $fillable = [
-        'id', 'name', 'url',
+        'id', 'name', 'url', 'user', 'public'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

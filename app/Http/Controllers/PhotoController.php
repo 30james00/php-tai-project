@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
@@ -46,10 +47,12 @@ class PhotoController extends Controller
                     'name' => 'string|max:40',
                     'image' => 'mimes:jpeg,png|max:1014',
                 ]);
+                $id = Str::orderedUuid();
                 $extension = $request->image->extension();
-                $request->image->storeAs('/images', $validated['name'] . "." . $extension);
-                $url = $validated['name'] . "." . $extension;
+                $request->image->storeAs('/images', $id . "." . $extension);
+                $url = $id . "." . $extension;
                 $file = Photo::create([
+                    'id' => $id,
                     'name' => $validated['name'],
                     'url' => $url,
                 ]);
