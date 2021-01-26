@@ -116,8 +116,11 @@ class PhotoController extends Controller
     {
         $validated = $request->validate([
             'name' => 'string|max:40',
+            'public' => '',
         ]);
+        $public = isset($validated['public']) ? true : false;
         $photo->name = $validated['name'];
+        $photo->public = $public;
         $photo->save();
         return back();
     }

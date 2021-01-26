@@ -15,11 +15,8 @@ use App\Http\Controllers\PhotoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('home');
+})->name('home');
 
 //PhotoController routes
 Route::get('photos/image/{path}', [PhotoController::class, 'showImage'])->middleware(['auth'])->name('photos.showImage');
