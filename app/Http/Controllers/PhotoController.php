@@ -18,8 +18,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $images = Photo::all();
-        return view('view-uploads')->with('images', $images);
+        $public = Photo::where('public', 1)->get();
+        $private = Photo::where('public', 0)->where('user', auth()->user()->id)->get();
+        return view('view-uploads', ['public' => $public, 'private' => $private]);
     }
 
     /**
@@ -86,9 +87,9 @@ class PhotoController extends Controller
 
     public function showImage(string $path)
     {
-        if (Storage::disk('local')->exists('images/'.$path)) {
-            
-            return response()->file(storage_path('app/images/'.$path));
+        if (Storage::disk('local')->exists('images/' . $path)) {
+
+            return response()->file(storage_path('app/images/' . $path));
         }
         abort(500, 'Could not upload image :(');
     }
@@ -130,7 +131,7 @@ class PhotoController extends Controller
     public function destroy(Photo $photo)
     {
         //delete file
-        Storage::delete($photo->url);
+        Storage::delete('/images/'.$photo->url);
         //delete form database
         $photo->delete();
         //redirect to the same page
