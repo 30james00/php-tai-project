@@ -44,7 +44,7 @@
                 <x-dropdown width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div>{{ Auth::user()->name }}</div>
+                            <p>{{ Auth::user()->name }}</p>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -61,14 +61,14 @@
 
                             <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('photo.logout') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>
                 @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('photo.login') }}</a>
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('photo.register') }}</a>
                 @endauth
             </div>
 
@@ -131,14 +131,14 @@
 
                             <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('photo.logout') }}
                             </x-responsive-nav-link>
                         </form>
                     </div>
                 </div>
                 @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('photo.login') }}</a>
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('photo.register') }}</a>
                 @endauth
             </div>
         </div>
