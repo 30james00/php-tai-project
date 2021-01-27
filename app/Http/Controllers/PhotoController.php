@@ -69,7 +69,7 @@ class PhotoController extends Controller
                 return \Redirect::back();
             }
         }
-        abort(500, 'Could not upload image :(');
+        abort(500, 'Could not upload image');
     }
 
     /**
@@ -91,7 +91,7 @@ class PhotoController extends Controller
 
             return response()->file(storage_path('app/images/' . $path));
         }
-        abort(500, 'Could not upload image :(');
+        abort(500, 'Could not show image');
     }
 
     /**
@@ -114,7 +114,7 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        if (auth()->user()->id == $photo->id) {
+        if (auth()->user()->id == $photo->user) {
             $validated = $request->validate([
                 'name' => 'string|max:40',
                 'public' => '',
@@ -137,7 +137,7 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
-        if (auth()->user()->id == $photo->id) {
+        if (auth()->user()->id == $photo->user) {
             //delete file
             Storage::delete('/images/' . $photo->url);
             //delete form database
