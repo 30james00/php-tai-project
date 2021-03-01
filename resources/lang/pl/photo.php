@@ -8,6 +8,7 @@ return [
     'delete' => 'Usuń',
     'desc' => 'Aplikacja webowa do przechowywania zdjęć',
     'empty' => 'Brak zdjęć do wyświetlenia',
+    'error' => 'Błąd',
     'file' => 'Plik',
     'file-name' => 'Nazwa pliku',
     'gallery' => 'Galeria',
