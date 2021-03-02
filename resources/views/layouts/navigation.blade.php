@@ -67,8 +67,8 @@
                     </x-slot>
                 </x-dropdown>
                 @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('photo.login') }}</a>
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('photo.register') }}</a>
+                <a href="{{ route('login') }}" class="text-sm text-gray-700">{{ __('photo.login') }}</a>
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700">{{ __('photo.register') }}</a>
                 @endauth
             </div>
 
@@ -137,8 +137,8 @@
                     </div>
                 </div>
                 @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{ __('photo.login') }}</a>
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">{{ __('photo.register') }}</a>
+                <a href="{{ route('login') }}" class="text-sm text-gray-700">{{ __('photo.login') }}</a>
+                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700">{{ __('photo.register') }}</a>
                 @endauth
             </div>
         </div>

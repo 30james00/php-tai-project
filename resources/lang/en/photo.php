@@ -8,6 +8,7 @@ return [
     'delete' => 'Delete',
     'desc' => 'Web application for photo upload',
     'empty' => 'No photos to view',
+    'error' => 'Error',
     'file' => 'File',
     'file-name' => 'File name',
     'gallery' => 'Gallery',

@@ -48,7 +48,7 @@
                 @endif
 
                 <x-button class="ml-3">
-                    {{ __('Login') }}
+                    {{ __('photo.login') }}
                 </x-button>
             </div>
         </form>
